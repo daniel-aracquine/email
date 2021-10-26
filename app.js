@@ -1,9 +1,14 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
+app.use(cors({
+    origin: '*'
+}));
 const port = process.env.PORT || 3000
 require('./db/mongoose')
 const Email = require('./models/email')
 app.use(express.json())
+
 app.post('/email',async (req,res) => {
     const email = new Email(req.body)
     try {
